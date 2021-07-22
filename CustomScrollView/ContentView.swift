@@ -22,7 +22,7 @@ struct ContentView: View {
                     .resizable()
                     .frame(width: 300, height: 500)
                     .cornerRadius(10)
-                    .shadow(color: .white,radius: 10)
+                    .shadow(color: .white,radius: 5)
                     .offset(y:20)
             }
             .options(options)
@@ -30,9 +30,11 @@ struct ContentView: View {
                 vertical: .absolute(100), horizontal: .absolute(80)
             )
             if viewModel.selected != nil{
+               
                 DetailView(id: viewModel.selected, viewModel: viewModel)
                     .frame(width: 300, height: 350, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                     //.offset(y:40)
+                
             }
         }.onAppear{viewModel.detData()}
         
@@ -51,11 +53,13 @@ struct DetailView: View {
     var viewModel:ViewModel
     var body: some View {
             VStack {
+                
                 Text(viewModel.selectedFact(id: id)?.title ?? "")
                     .font(.title)
                 Text(viewModel.selectedFact(id: id)?.description ?? "")
                 Spacer()
             }.foregroundColor(.white)
+            .animation(.easeIn)
             .padding()
     }
 }
