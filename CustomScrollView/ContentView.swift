@@ -10,9 +10,11 @@ import CollectionViewPagingLayout
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
     var options : ScaleTransformViewOptions{
-        .layout(.rotary)
+        .layout(.coverFlow)
     }
     var body: some View {
+        ZStack{
+            Color.black
         VStack{
             Spacer()
             ScalePageView(viewModel.places,selection: $viewModel.selected){ place in
@@ -20,7 +22,7 @@ struct ContentView: View {
                     .resizable()
                     .frame(width: 300, height: 500)
                     .cornerRadius(10)
-                    .shadow(radius: 5)
+                    .shadow(color: .white,radius: 10)
                     .offset(y:20)
             }
             .options(options)
@@ -33,8 +35,9 @@ struct ContentView: View {
                     //.offset(y:40)
             }
         }.onAppear{viewModel.detData()}
-        .ignoresSafeArea()
-       
+        
+      
+        }  .ignoresSafeArea()
     }
 }
 struct ContentView_Previews: PreviewProvider {
@@ -52,7 +55,7 @@ struct DetailView: View {
                     .font(.title)
                 Text(viewModel.selectedFact(id: id)?.description ?? "")
                 Spacer()
-            }
+            }.foregroundColor(.white)
             .padding()
     }
 }
